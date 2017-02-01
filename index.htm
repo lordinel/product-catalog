@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script type="application/javascript" src="lib/jquery-3.0.0.min.js"></script>
+    <script type="application/javascript" src="classes/Product.js"></script>
+    <script type="application/javascript" src="classes/Shows.js"></script>
+    <script type="application/javascript" src="classes/Books.js"></script>
+    <script type="application/javascript" src="classes/Games.js"></script>
+    <script type="application/javascript" src="classes/Music.js"></script>
+    <script type="application/javascript" src="classes/Catalog.js"></script>
+    <script type="application/javascript">
+    <!--
+        $(function(){
+            // to be called when document is ready
+            
+            var catalog = new Catalog;
+            
+            // bind events
+            $('#search_field').bind({
+                keyup: function() {
+                    catalog.setSearchText($('#search_field').val());
+                    catalog.view();
+                }
+            });
+            $('#reset_btn').bind({
+                click: function() {
+                    catalog.setSearchText(null);
+                    catalog.setTypeFilter(null);
+                    catalog.view();
+                    return true;
+                }
+            });
+            $('input[name=type_filter_list_option]').bind({
+                change: function() {
+                    catalog.setTypeFilter($('input[name=type_filter_list_option]:checked').val());
+                    catalog.view();
+                }
+            });
+            $('button#grid_view').bind({
+                click: function() {
+                    catalog.toggleView('grid');
+                    return false;
+                }
+            });
+            $('button#list_view').bind({
+                click: function() {
+                    catalog.toggleView('list');
+                    return false;
+                }
+            });
+            $('#add_product_submit').bind({
+                click: function() {
+                    catalog.add();
+                    return false;
+                }
+            });
+            $('#add_product_cancel').bind({
+                click: function() {
+                    catalog.toggleAddProductDialog('hide');
+                    $('form[name=add_product_form]')[0].reset();
+                }
+            });
+            
+            // reset view
+            $('form[name=filter_form]')[0].reset();
+            $('form[name=add_product_form]')[0].reset();
+            
+            // load and display products
+            catalog.load();
+        });
+    //-->
+    </script>
+    <link rel="stylesheet" type="text/css" href="styles/style.css" /> 
+    <title>Product Catalog</title>
+</head>
+<body>
+    <div id="header">
+        <h1>Product Catalog</h1>
+        <form name="filter_form" method="get" action="" enctype="multipart/form-data">
+        <div id="search">
+            <input type="text" id="search_field" name="search_field" size="30" maxlength="255" placeholder="Search products by name" />
+            <input type="reset" id="reset_btn" name="reset_btn" value="Clear Filters" />
+        </div>
+        <div id="type_filter">
+            <span id="type_filter_text">Type:</span>
+            <div id="filter_list">
+                <div id="filter_all_section" class="filter_option">
+                    <input type="radio" id="filter_all" name="type_filter_list_option" value="All" checked="checked" />
+                    <label for="filter_all">All</label>
+                </div>
+                <div id="filter_shows_section" class="filter_option">
+                    <input type="radio" id="filter_shows" name="type_filter_list_option" value="Shows" />
+                    <label for="filter_shows">Shows</label>
+                </div>
+                <div id="filter_books_section" class="filter_option">
+                    <input type="radio" id="filter_books" name="type_filter_list_option" value="Books" />
+                    <label for="filter_books">Books</label>
+                </div>
+                <div id="filter_games_section" class="filter_option">
+                    <input type="radio" id="filter_games" name="type_filter_list_option" value="Games" />
+                    <label for="filter_games">Games</label>
+                </div>
+                <div id="filter_music_section" class="filter_option">
+                    <input type="radio" id="filter_music" name="type_filter_list_option" value="Music" />
+                    <label for="filter_music">Music</label>
+                </div>
+            </div>
+        </div>
+        <div id="view_selector">
+            <span id="view_selector_text">View:</span>
+            <button id="grid_view" class="selected_view"><img src="images/grid_icon.png" alt="Grid Icon" /></button>
+            <button id="list_view"><img src="images/list_icon.png" alt="List Icon" /></button>
+        </div>
+        </form>
+    </div>
+    <div id="content" class="grid_content"></div>
+    <div id="add_product_dialog">
+        <h2>Add Product</h2>
+        <form name="add_product_form" method="post" action="" enctype="multipart/form-data">
+        <div id="add_product_name">
+            <label for="new_product_name">New Product Name:</label>
+            <input type="text" id="new_product_name" name="new_product_name" size="40" maxlength="255" required="required" />
+        </div>
+        <div id="add_product_type">
+            <label for="new_product_type">Product Type:</label>
+            <select id="new_product_type" name="new_product_type" required="required">
+                <option value="Shows">Shows</option>
+                <option value="Books">Books</option>
+                <option value="Games">Games</option>
+                <option value="Music">Music</option>
+            </select>
+        </div>
+        <div id="add_product_photo">
+            <label for="new_product_photo">Photo (250x250):</label>
+            <input type="file" id="new_product_photo" name="new_product_photo" size="255" required="required" accept="image/gif, image/png, image/jpeg" />
+        </div>
+        <div id="add_product_buttons">
+            <input type="submit" id="add_product_submit" name="add_product_submit" value="Save" />
+            <input type="reset" id="add_product_reset" name="add_product_reset" value="Reset" />
+            <input type="button" id="add_product_cancel" name="add_product_cancel" value="Cancel" />
+        </div>
+        </form>
+    </div>
+    <div id="footer"></div>
+    <div id="dialog_overlay"></div>
+</body>
+</html>

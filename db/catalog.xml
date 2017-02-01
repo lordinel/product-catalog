@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CATALOG>
+  <PRODUCT>
+    <NAME>A Bug's Life</NAME>
+    <PHOTO>abugslife.jpg</PHOTO>
+    <TYPE>Shows</TYPE>
+  </PRODUCT>
+  <PRODUCT>
+    <NAME>Three Little Pigs</NAME>
+    <PHOTO>threelittlepigs.jpg</PHOTO>
+    <TYPE>Books</TYPE>
+  </PRODUCT>
+  <PRODUCT>
+    <NAME>Angry Birds</NAME>
+    <PHOTO>angrybirds.jpg</PHOTO>
+    <TYPE>Games</TYPE>
+  </PRODUCT>
+  <PRODUCT>
+    <NAME>Barney Music for Me!</NAME>
+    <PHOTO>barneymusicforme.jpg</PHOTO>
+    <TYPE>Music</TYPE>
+  </PRODUCT>
+  <PRODUCT>
+    <NAME>New Super Mario Bros. 2</NAME>
+    <PHOTO>newsupermariobros2.png</PHOTO>
+    <TYPE>Games</TYPE>
+  </PRODUCT>
+</CATALOG>
